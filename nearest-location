@@ -1,0 +1,47 @@
+import "dart:math";
+
+void main() {
+  String answer = checkClosestPoint();
+  print(answer);
+}
+
+class Location {
+  final Point point;
+  final String name;
+
+  Location(this.name, this.point);
+}
+
+var myHome = Location('My House', Point(34.8310499, -82.3349326));
+
+var gmh = Location('Greenville Memorial', Point(34.8186906, -82.4147262));
+
+var grmh = Location('Greer Memorial', Point(34.920209, -82.2465535));
+
+var gmhPoint = Point(34.920209, -82.2465535);
+
+var testLocation = Point(34.832309, -82.3352437);
+
+var comparisonLocations = [myHome, gmh, grmh];
+
+String checkClosestPoint() {
+  List<Location> comparisonLocations = [myHome, gmh, grmh];
+
+  double shortestDistance;
+  String closestLocation;
+
+  for (var location in comparisonLocations) {
+    var checkDistance = testLocation.distanceTo(
+        Point(location.point.x.toDouble(), location.point.y.toDouble()));
+
+    if (shortestDistance == null) {
+      shortestDistance = checkDistance.toDouble();
+      closestLocation = location.name;
+    } else if (shortestDistance > checkDistance) {
+      shortestDistance = checkDistance;
+      closestLocation = location.name;
+    }
+  }
+
+  return "Closest location is $closestLocation and it's distance is $shortestDistance";
+}
